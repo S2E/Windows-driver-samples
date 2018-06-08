@@ -1,0 +1,42 @@
+[Version]
+Signature   = "$WINDOWS NT$"
+Provider    = %Msft%
+DriverVer   = 08/28/2000,1.0.0.1
+CatalogFile = cdfs2.cat
+Class = cdromdrv
+
+[DestinationDirs]
+DefaultDestDir = 12
+ExampleFileSystem.DriverFiles = 12
+
+[SourceDisksNames]
+1 = %Disk1%
+
+[SourceDisksFiles]
+cdfs2.sys = 1
+
+[DefaultInstall]
+OptionDesc = %ServiceDesc%
+CopyFiles = ExampleFileSystem.DriverFiles
+
+[ExampleFileSystem.DriverFiles]
+cdfs2.sys
+
+[DefaultInstall.Services]
+AddService = %ServiceName%,,ExampleFileSystem.Service
+
+[ExampleFileSystem.Service]
+DisplayName    = %ServiceName%
+Description    = %ServiceDesc%
+ServiceBinary  = %12%\cdfs2.sys
+ServiceType    = 2 ;    SERVICE_FILE_SYSTEM_DRIVER
+StartType      = 1 ;    SERVICE_SYSTEM_START
+ErrorControl   = 1 ;    SERVICE_ERROR_NORMAL
+LoadOrderGroup = "File System"
+
+[Strings]
+Msft        = "ACME Corporation"
+ServiceDesc = "Sample cdrom file system driver"
+ServiceName = "cdfs2"
+ParameterPath = "SYSTEM\CurrentControlSet\Services\ExampleFileSystem\Parameters"
+Disk1       = "Example File System Driver CD"
