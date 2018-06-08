@@ -93,7 +93,7 @@ Return Value:
     // Create the device object.
     //
 
-    RtlInitUnicodeString( &UnicodeString, L"\\Cdfs" );
+    RtlInitUnicodeString( &UnicodeString, L"\\Cdfs2" );
 
     Status = IoCreateDevice( DriverObject,
                              0,
@@ -183,7 +183,8 @@ Return Value:
     //  and b) other normal priority filesystems that may be registered later.
     //
 
-    CdfsFileSystemDeviceObject->Flags |= DO_LOW_PRIORITY_FILESYSTEM;
+    // Do not conflict with the system driver
+    // CdfsFileSystemDeviceObject->Flags |= DO_LOW_PRIORITY_FILESYSTEM;
 
     IoRegisterFileSystem( CdfsFileSystemDeviceObject );
     ObReferenceObject (CdfsFileSystemDeviceObject);

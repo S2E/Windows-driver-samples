@@ -77,16 +77,16 @@
   </ImportGroup>
   <ItemGroup Label="WrappedTaskItems" />
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
-    <TargetName>cdfs</TargetName>
+    <TargetName>cdfs2</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
-    <TargetName>cdfs</TargetName>
+    <TargetName>cdfs2</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
-    <TargetName>cdfs</TargetName>
+    <TargetName>cdfs2</TargetName>
   </PropertyGroup>
   <PropertyGroup Condition="'$(Configuration)|$(Platform)'=='Debug|Win32'">
-    <TargetName>cdfs</TargetName>
+    <TargetName>cdfs2</TargetName>
   </PropertyGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
