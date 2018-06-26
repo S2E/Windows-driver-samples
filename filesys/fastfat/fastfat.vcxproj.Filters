@@ -162,4 +162,9 @@
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>
+  <ItemGroup>
+    <Inf Include="fastfat2.inf">
+      <Filter>Source Files</Filter>
+    </Inf>
+  </ItemGroup>
 </Project>
