@@ -923,7 +923,9 @@ Return Value:
     PARTITION_INFORMATION_EX PartitionInformation;
     NTSTATUS StatusPartInfo;
 
+#if (NTDDI_VERSION >= NTDDI_WIN8)
     GUID VolumeGuid = {0};
+#endif
 
 
     PAGED_CODE();
@@ -1209,6 +1211,7 @@ Return Value:
             try_return( Status = STATUS_UNRECOGNIZED_VOLUME );
         }
 
+#if (NTDDI_VERSION >= NTDDI_WIN8)
         //
         //  Initialize the volume guid.
         //
@@ -1236,6 +1239,7 @@ Return Value:
         }
 
         IoVolumeDeviceToGuidPath( Vcb->TargetDeviceObject, &Vcb->VolumeGuidPath );
+#endif
 
         //
         //  Unpack the BPB.  We used to do some sanity checking of the FATs at
@@ -2887,10 +2891,11 @@ Return Value:
 
 #endif
 
-
+#if (NTDDI_VERSION >= NTDDI_VISTA)
     case FSCTL_SET_ZERO_ON_DEALLOCATION:
         Status = FatSetZeroOnDeallocate( IrpContext, Irp );
         break;
+#endif
 
     default :
 
