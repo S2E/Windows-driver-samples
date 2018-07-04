@@ -607,7 +607,12 @@ Return Value:
     return EXCEPTION_EXECUTE_HANDLER;
 }
 
-
+#if !(NTDDI_VERSION >= NTDDI_WS03SP1)
+BOOLEAN KeAreAllApcsDisabled() {
+    /* Pre-Server 2003 (specifically SP1), special APCs were enabled if below APC_LEVEL. */
+    return KeAreApcsDisabled() && KeGetCurrentIrql() >= APC_LEVEL;
+}
+#endif
 
 _Requires_lock_held_(_Global_critical_region_)
 NTSTATUS
@@ -974,6 +979,16 @@ Return Value:
     return;
 }
 
+#if !(NTDDI_VERSION >= NTDDI_VISTA)
+LOGICAL IoWithinStackLimits(ULONG_PTR RegionStart,  SIZE_T RegionSize)
+{
+    ULONG_PTR LowLimit, HighLimit;
+    IoGetStackLimits(&LowLimit, &HighLimit);
+
+    return RegionStart <= (HighLimit - RegionSize) && (RegionStart > LowLimit);
+}
+#endif
+
 
 VOID
 CdSetThreadContext (
@@ -1042,7 +1057,7 @@ Return Value:
     //
 #pragma warning(suppress: 6011) // Bug in PREFast around bitflag operations
     if (FlagOn( IrpContext->Flags, IRP_CONTEXT_FLAG_TOP_LEVEL ) ||
-        (!IoWithinStackLimits( (ULONG_PTR)CurrentThreadContext, sizeof( THREAD_CONTEXT ) ) ||
+        (!IoWithinStackLimits((ULONG_PTR)CurrentThreadContext, sizeof( THREAD_CONTEXT ) ) ||
          FlagOn( (ULONG_PTR) CurrentThreadContext, 0x3 ) ||
          (CurrentThreadContext->Cdfs != 0x53464443))) {
 

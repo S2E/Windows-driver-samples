@@ -797,10 +797,12 @@ Return Value:
         ExFreePool( Vcb->Vpb );
     }
 
+#if (NTDDI_VERSION >= NTDDI_WIN8)
     if (Vcb->VolumeGuidPath.Buffer) {
         ExFreePool( Vcb->VolumeGuidPath.Buffer );
         Vcb->VolumeGuidPath.Buffer = NULL;
     }
+#endif
 
     //
     //  Remove this record from the global list of all Vcb records.

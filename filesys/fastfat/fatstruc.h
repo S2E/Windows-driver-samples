@@ -244,6 +244,7 @@ typedef struct _VCB {
 
     PDEVICE_OBJECT TargetDeviceObject;
 
+#if (NTDDI_VERSION >= NTDDI_WIN8)
     //
     //  The volume GUID of the target device object.
     //
@@ -255,7 +256,7 @@ typedef struct _VCB {
     //
 
     UNICODE_STRING VolumeGuidPath;
-
+#endif
 
     //
     //  A pointer to the VPB for the volume passed in by the I/O system on
