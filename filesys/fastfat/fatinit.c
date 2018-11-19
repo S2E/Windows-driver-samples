@@ -103,7 +103,7 @@ Return Value:
     // know this name, we must keep it.
     //
 
-    RtlInitUnicodeString( &UnicodeString, L"\\Fat" );
+    RtlInitUnicodeString( &UnicodeString, L"\\Fat2" );
     Status = IoCreateDevice( DriverObject,
                              0,
                              &UnicodeString,
@@ -120,7 +120,7 @@ Return Value:
     // Create the device object for "cdroms".
     //
 
-    RtlInitUnicodeString( &UnicodeString, L"\\FatCdrom" );
+    RtlInitUnicodeString( &UnicodeString, L"\\FatCdrom2" );
     Status = IoCreateDevice( DriverObject,
                              0,
                              &UnicodeString,
